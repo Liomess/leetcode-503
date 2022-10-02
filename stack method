@@ -1,0 +1,23 @@
+class Solution:
+    def nextGreaterElements(self, nums: List[int]) -> List[int]:
+        ans=[-2]*len(nums)
+        stack=[]
+        last=len(nums)-1
+        stack.append(nums[last])
+        last-=1
+        while(last>=0):
+            while stack!=[] and nums[last]>stack[-1]:
+                stack.pop()
+            stack.append(nums[last])
+            last-=1
+        last=len(nums)-1
+        while last>=0:
+            while stack!=[] and nums[last]>=stack[-1]:
+                stack.pop()
+            if stack==[]:
+                ans[last]=-1
+            else:
+                ans[last]=stack[-1]
+            stack.append(nums[last])
+            last-=1
+        return ans
